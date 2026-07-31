@@ -54,12 +54,12 @@ func websocketLoop(conn *websocket.Conn, channel string, readChan chan asgi.Mess
 	order := 0
 	// Code that is sent to the channel layer. 1006 is used, when no close message was received
 	closeCode := 1006
-	closed := false
+//	closed := false
 
 	// In the end: Close the websocket connection and inform the channel layer about it.
 	defer func() {
 		close(readChan)
-		closed = true
+//		closed = true
 		order++
 		dm := asgi.DisconnectionMessage{
 			ReplyChannel: channel,
