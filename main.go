@@ -11,7 +11,6 @@ import (
 	"github.com/urfave/cli"
 
 	"github.com/ostcar/geiss/asgi"
-	"github.com/ostcar/geiss/asgi/redis"
 )
 
 var channelLayer asgi.ChannelLayer
@@ -50,33 +49,9 @@ func main() {
 			Value: nil,
 			Usage: "url and file path to serve static files in the form /static/:/path/to/files",
 		},
-		cli.StringFlag{
-			Name:  "redis, r",
-			Value: ":6379",
-			Usage: "host and port of the redis server in the form HOST:Port",
-		},
-		cli.StringFlag{
-			Name:  "redis-prefix",
-			Value: "asgi:",
-			Usage: "prefix of the redis keys",
-		},
-		cli.IntFlag{
-			Name:  "redis-capacity",
-			Value: 100,
-			Usage: "channel capacity",
-		},
-		cli.IntFlag{
-			Name:  "redis-expiry",
-			Value: 60,
-			Usage: "seconds until a message to the redis channel layer will expire",
-		},
 	}
 	app.Action = func(c *cli.Context) error {
-		channelLayer = redis.NewChannelLayer(
-			c.Int("redis-expiry"),
-			c.String("redis"),
-			c.String("redis-prefix"),
-			c.Int("redis-capacity"))
+		channelLayer = nil // redis.NewChannelLayer()
 
 		go globalReceive()
 
