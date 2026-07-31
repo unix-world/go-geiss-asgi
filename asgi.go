@@ -37,6 +37,9 @@ func globalReceive() {
 	// Currently, this happens in one coroutine. It could be faster if there are
 	// more coroutines or if the globalMessage channel has a buffer.
 	go func() {
+		if(channelLayer == nil) {
+			return
+		}
 		for {
 			channelname, message, err := channelLayer.Receive([]string{globalChannelname}, true)
 			if err != nil {

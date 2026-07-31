@@ -30,6 +30,9 @@ func readBodyChunk(body io.Reader) (content []byte, eof bool, err error) {
 
 // Create the reply channel name for a http.response channel.
 func createResponseReplyChannel() (replyChannel string, err error) {
+	if(channelLayer == nil) {
+		return "", nil
+	}
 	replyChannel, err = channelLayer.NewChannel(globalChannelname)
 	if err != nil {
 		return "", asgi.NewForwardError("could not create a new channel name", err)

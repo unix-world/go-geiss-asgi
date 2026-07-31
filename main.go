@@ -11,6 +11,8 @@ import (
 	"github.com/urfave/cli"
 
 	"github.com/ostcar/geiss/asgi"
+
+	"github.com/ostcar/geiss/asgi/nochannel"
 )
 
 var channelLayer asgi.ChannelLayer
@@ -51,7 +53,7 @@ func main() {
 		},
 	}
 	app.Action = func(c *cli.Context) error {
-		channelLayer = nil // redis.NewChannelLayer()
+		channelLayer = nochannel.NewChannelLayer() // redis.NewChannelLayer()
 
 		go globalReceive()
 
