@@ -5,6 +5,7 @@ go 1.24.13
 require (
 	github.com/gorilla/websocket v1.5.3
 	github.com/ostcar/geiss v0.0.0-20170511061424-bb3010ede4c6
+	github.com/satori/go.uuid v1.2.0
 	github.com/urfave/cli v1.22.17
 )
 
